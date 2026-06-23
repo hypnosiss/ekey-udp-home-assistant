@@ -1,0 +1,44 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "ekey UDP",
+        "description": "Listen for ekey UDP packets and expose them as Home Assistant events.",
+        "data": {
+          "host": "Bind address",
+          "port": "UDP port",
+          "allowed_sources_text": "Allowed source IPs or CIDR networks",
+          "dedupe_seconds": "Duplicate suppression window",
+          "max_packets_per_minute": "Maximum packets per minute per source"
+        }
+      }
+    },
+    "error": {
+      "invalid_sources": "Use a comma-separated list of IP addresses or CIDR networks."
+    },
+    "abort": {
+      "already_configured": "This ekey UDP listener is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "ekey UDP options",
+        "description": "Configure naming, access rules, and packet filtering.",
+        "data": {
+          "allowed_sources_text": "Allowed source IPs or CIDR networks",
+          "dedupe_seconds": "Duplicate suppression window",
+          "max_packets_per_minute": "Maximum packets per minute per source",
+          "readers_json": "Readers JSON",
+          "actions_json": "Actions JSON",
+          "users_json": "Users JSON",
+          "access_json": "Access rules JSON"
+        }
+      }
+    },
+    "error": {
+      "invalid_json": "Enter valid JSON.",
+      "invalid_sources": "Use a comma-separated list of IP addresses or CIDR networks."
+    }
+  }
+}

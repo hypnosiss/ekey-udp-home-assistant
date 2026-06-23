@@ -1,0 +1,28 @@
+{
+  "readers_json": {
+    "12345678901234": "front_door",
+    "12345678901235": "side_gate"
+  },
+  "actions_json": {
+    "900001": "accepted",
+    "900002": "accepted"
+  },
+  "users_json": {
+    "100001": {
+      "name": "Alice"
+    },
+    "100002": {
+      "name": "Bob"
+    }
+  },
+  "access_json": [
+    {
+      "id": "front_door",
+      "name": "Front door",
+      "readers": ["front_door"],
+      "actions": ["accepted"],
+      "users": ["Alice"],
+      "fingers": ["7"]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "ekey UDP",
+        "description": "Nasluchuje pakietow UDP ekey i publikuje je jako zdarzenia Home Assistant.",
+        "data": {
+          "host": "Adres nasluchiwania",
+          "port": "Port UDP",
+          "allowed_sources_text": "Dozwolone adresy IP lub sieci CIDR",
+          "dedupe_seconds": "Okno odrzucania duplikatow",
+          "max_packets_per_minute": "Maksymalna liczba pakietow na minute z jednego zrodla"
+        }
+      }
+    },
+    "error": {
+      "invalid_sources": "Podaj liste adresow IP lub sieci CIDR oddzielonych przecinkami."
+    },
+    "abort": {
+      "already_configured": "Ten nasluch ekey UDP jest juz skonfigurowany."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opcje ekey UDP",
+        "description": "Skonfiguruj nazwy, reguly dostepu i filtrowanie pakietow.",
+        "data": {
+          "allowed_sources_text": "Dozwolone adresy IP lub sieci CIDR",
+          "dedupe_seconds": "Okno odrzucania duplikatow",
+          "max_packets_per_minute": "Maksymalna liczba pakietow na minute z jednego zrodla",
+          "readers_json": "Czytniki JSON",
+          "actions_json": "Akcje JSON",
+          "users_json": "Uzytkownicy JSON",
+          "access_json": "Reguly dostepu JSON"
+        }
+      }
+    },
+    "error": {
+      "invalid_json": "Podaj poprawny JSON.",
+      "invalid_sources": "Podaj liste adresow IP lub sieci CIDR oddzielonych przecinkami."
+    }
+  }
+}
