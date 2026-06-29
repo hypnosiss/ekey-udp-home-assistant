@@ -55,12 +55,18 @@ class RuntimeData:
     config: dict[str, Any]
     listeners: list[Callable[[dict[str, Any]], None]]
     transport: asyncio.DatagramTransport | None
+    transport_closed: asyncio.Event
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up ekey UDP listener from a config entry."""
     config = _build_runtime_config(entry)
-    runtime = RuntimeData(config=config, listeners=[], transport=None)
+    runtime = RuntimeData(
+        config=config,
+        listeners=[],
+        transport=None,
+        transport_closed=asyncio.Event(),
+    )
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = runtime
 
     dedupe_seconds = config[CONF_DEDUPE_SECONDS]
@@ -195,6 +201,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         def error_received(self, exc: Exception) -> None:
             _LOGGER.warning("Error from ekey UDP socket: %s", exc)
 
+        def connection_lost(self, exc: Exception | None) -> None:
+            runtime.transport_closed.set()
+
     loop = asyncio.get_running_loop()
     try:
         transport, _protocol = await loop.create_datagram_endpoint(
@@ -224,6 +233,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if runtime and runtime.transport is not None:
         runtime.transport.close()
         runtime.transport = None
+        await runtime.transport_closed.wait()
     return unload_ok
 
 
