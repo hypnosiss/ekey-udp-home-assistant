@@ -129,7 +129,7 @@ def _user_schema(user_input: dict[str, Any] | None) -> vol.Schema:
             vol.Required(
                 CONF_DEDUPE_SECONDS,
                 default=user_input.get(CONF_DEDUPE_SECONDS, DEFAULT_DEDUPE_SECONDS),
-            ): float,
+            ): vol.All(vol.Coerce(float), vol.Range(min=0)),
             vol.Required(
                 CONF_MAX_PACKETS_PER_MINUTE,
                 default=user_input.get(
@@ -156,7 +156,7 @@ def _options_schema(
             vol.Required(
                 CONF_DEDUPE_SECONDS,
                 default=values.get(CONF_DEDUPE_SECONDS, DEFAULT_DEDUPE_SECONDS),
-            ): float,
+            ): vol.All(vol.Coerce(float), vol.Range(min=0)),
             vol.Required(
                 CONF_MAX_PACKETS_PER_MINUTE,
                 default=values.get(
